@@ -4,7 +4,7 @@
 
 using namespace std;
 
-short date_to_month(string date)
+short dateToMonth(string date)
 {
 	short month{};
 	stringstream date_ss(date);
@@ -18,12 +18,12 @@ short date_to_month(string date)
 	return month;
 }
 
-int time_to_minute(int time)
+int timeToMinute(int time)
 {
 	return 0;
 }
 
-int minute_to_ddhhmm(int time)
+int minuteToDDHHMM(int time)
 {
 	return 0;
 }

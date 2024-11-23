@@ -5,8 +5,8 @@
 
 using namespace std;
 
-short date_to_month(string date);
-int time_to_minute(int time);
-string minute_to_ddhhmm(int time);
+short dateToMonth(string date);
+int timeToMinute(int time);
+string minuteToDDHHMM(int time);
 
 #endif
