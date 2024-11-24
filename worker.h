@@ -1,4 +1,4 @@
-#ifndef WORKER
+﻿#ifndef WORKER
 #define WORKER
 
 #include <string>

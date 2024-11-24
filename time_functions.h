@@ -1,4 +1,4 @@
-#ifndef TIME_FUNCTIONS
+﻿#ifndef TIME_FUNCTIONS
 #define TIME_FUNCTIONS
 
 #include <string>
