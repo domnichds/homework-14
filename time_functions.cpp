@@ -5,18 +5,33 @@
 
 using namespace std;
 
+/**
+ * @brief Извлекает номер месяца из строки с датой в формате DD-MM-YYYY.
+ *
+ * Данная функция разбивает строку с датой по разделителю `-` и извлекает второе поле,
+ * соответствующее номеру месяца (MM). Предполагается, что входная строка имеет
+ * корректный формат (например, "22-01-2453").
+ *
+ * @param date Строка с датой в формате DD-MM-YYYY.
+ * @return Номер месяца (целое число от 1 до 12).
+ */
 short dateToMonth(string date)
 {
-	short month{};
-	stringstream date_ss(date);
-	string current_line;
-	short counter = 0;
-	while (getline(date_ss, current_line, '-'))
-	{
-		if (counter == 1) { month = stoi(current_line); }
-		counter++;
-	}
-	return month;
+    short month{}; // Переменная для хранения номера месяца.
+    stringstream date_ss(date); // Поток для обработки строки даты.
+    string current_line; // Временная строка для хранения текущего поля.
+    short counter = 0; // Счетчик полей, разделенных '-'.
+
+    // Разделяем строку с датой по символу '-' и обрабатываем части.
+    while (getline(date_ss, current_line, '-')) {
+        if (counter == 1)
+        {
+            // Если это второе поле, преобразуем его в число и сохраняем как месяц.
+            month = stoi(current_line);
+        }
+        counter++; // Увеличиваем счетчик полей.
+    }
+    return month; // Возвращаем извлеченный номер месяца.
 }
 
 /** 
