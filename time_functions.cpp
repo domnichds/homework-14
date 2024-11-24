@@ -57,7 +57,7 @@ string minuteToDDHHMM(int time)
 	int work_in_minutes = 0;
 	int work_in_days = 0;
 	
-	std::string result;
+	string result;
 
 	if (time >= 1440)
 	{
@@ -73,7 +73,7 @@ string minuteToDDHHMM(int time)
 		work_in_minutes = (time - (work_in_hours * 60));
 	}
 
-	result = std::to_string(work_in_days) + ":" + std::to_string(work_in_hours) + ":" + std::to_string(work_in_minutes);
+	result = to_string(work_in_days) + ":" + to_string(work_in_hours) + ":" + to_string(work_in_minutes);
 	
 	return result;
 }
