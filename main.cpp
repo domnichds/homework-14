@@ -5,6 +5,7 @@
 #include <sstream>
 #include <map>
 #include <iomanip>
+#include <algorithm>
 #include <fmt/core.h>
 #include <fmt/format.h>
 #include "time_functions.h"
@@ -108,7 +109,17 @@ vector<worker> readData(const string& file_name)
             result.push_back(current_worker); // Добавляем сотрудника в список.
         }
     }
+    // Сортируем сотрудников по алфоавиту
+    sort(result.begin(), result.end(), [](const worker& a, const worker& b) {
+        return a.name < b.name;
+        });
 
+    // Сортируем время каждого сотрудника по месяцу
+    for (short i = 0; i < result.size(); i++) {
+        sort(result[i].work_time.begin(), result[i].work_time.end(), [](const vector<int>& a, const vector<int>& b) {
+            return a[0] < b[0]; // Сортировка по первому элементу (месяц)
+            });
+    }
     return result; // Возвращаем заполненный вектор структур worker.
 }
 
@@ -214,4 +225,6 @@ void printTable(const vector<worker>& data) {
 int main()
 {
     setlocale(LC_ALL, "ru_RU.UTF-8");
+    vector<worker> data = readData("file1.csv");
+    printTable(data);
 }
