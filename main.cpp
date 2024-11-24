@@ -200,31 +200,39 @@ void printTable(const vector<worker>& data) {
     };
 
     // Шапка таблицы с выравниванием столбцов
+    cout << "\033[1;91m";
     cout << format("+{:-<26}+{:-<15}+{:-<26}+\n", "", "", "");
     cout << format("|{:<26}|{:<15}|{:<26}|\n", "      Имя сотрудника", "     Месяц", "    Отработанное время");
     cout << format("+{:-<26}+{:-<15}+{:-<26}+\n", "", "", "");
+    cout << "\033[0m";
 
     // Перебор всех сотрудников в векторе
     for (int i = 0; i < data.size(); i++) {
         // Перебор всех записей по времени работы для каждого сотрудника
         for (short j = 0; j < data[i].work_time.size(); j++) {
             // Выводим данные сотрудника в таблицу: имя, месяц и время работы в формате "дни:часы:минуты"
+            cout << "\033[36m";
             cout << format(
                 "| {:<25}| {:<14}| {:<25}|\n",
                 data[i].name,                        // Имя сотрудника
                 month_names[data[i].work_time[j][0]], // Название месяца
                 minuteToDDHHMM(data[i].work_time[j][1]) // Отработанное время
             );
+            cout << "\033[0m";
         }
     }
 
+
     // Нижняя граница таблицы
+    cout << "\033[1;91m";
     cout << format("+{:-<26}+{:-<15}+{:-<26}+\n", "", "", "");
+    cout << "\033[0m";
 }
 
 int main()
 {
     setlocale(LC_ALL, "ru_RU.UTF-8");
     vector<worker> data = readData("file1.csv");
+    writeData("result1.csv", data);
     printTable(data);
 }
