@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include<vector>
+#include <vector>
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -36,7 +36,7 @@ vector<worker> readData(const string& file_name)
 
     // Проверяем, удалось ли открыть файл.
     if (!inFile) {
-        throw runtime_error("Ошибка: файл \"" + file_name + "\" не найден или не может быть открыт!");
+        throw runtime_error("Ошибка: файл " + file_name +  " не найден или не может быть открыт!");
     }
 
     // Чтение строк из файла.
@@ -115,7 +115,7 @@ vector<worker> readData(const string& file_name)
         });
 
     // Сортируем время каждого сотрудника по месяцу
-    for (short i = 0; i < result.size(); i++) {
+    for (int i = 0; i < result.size(); i++) {
         sort(result[i].work_time.begin(), result[i].work_time.end(), [](const vector<int>& a, const vector<int>& b) {
             return a[0] < b[0]; // Сортировка по первому элементу (месяц)
             });
@@ -151,27 +151,24 @@ void writeData(const string& file_name, const vector<worker>& data)
     };
 
     // Проверяем, открылся ли файл для записи
-    if (outFile.is_open())
-    {
-        // Записываем заголовок таблицы CSV
-        outFile << "Имя сотрудника;Месяц;Отработанное время\n";
-        // Перебираем всех сотрудников в векторе
-        for (int i = 0; i < data.size(); i++)
-        {
-            // Перебираем все записи о времени работы сотрудника
-            for (short j = 0; j < data[i].work_time.size(); j++)
-            {
-                // Записываем имя, месяц и отработанное время в формате "дни:часы:минуты"
-                outFile << data[i].name << ";"
-                    << month_names[data[i].work_time[j][0]] << ";"
-                    << minuteToDDHHMM(data[i].work_time[j][1]) << "; \n";
-            }
-        }
-    }
-    else
+    if (!outFile.is_open())
     {
         // Если файл не удалось открыть, выбрасываем исключение с сообщением об ошибке
         throw runtime_error("Ошибка при открытии файла для записи: " + file_name);
+    }
+    // Записываем заголовок таблицы CSV
+    outFile << "Имя сотрудника;Месяц;Отработанное время\n";
+    // Перебираем всех сотрудников в векторе
+    for (int i = 0; i < data.size(); i++)
+    {
+        // Перебираем все записи о времени работы сотрудника
+        for (short j = 0; j < data[i].work_time.size(); j++)
+        {
+            // Записываем имя, месяц и отработанное время в формате "дни:часы:минуты"
+            outFile << data[i].name << ";"
+               << month_names[data[i].work_time[j][0]] << ";"
+               << minuteToDDHHMM(data[i].work_time[j][1]) << "; \n";
+        }
     }
     // Закрываем файл после записи данных
     outFile.close();
@@ -201,9 +198,9 @@ void printTable(const vector<worker>& data) {
 
     // Шапка таблицы с выравниванием столбцов
     cout << "\033[1;91m";
-    cout << format("+{:-<26}+{:-<15}+{:-<26}+\n", "", "", "");
+    cout << format("+{:=<26}+{:=<15}+{:=<26}+\n", "", "", "");
     cout << format("|{:<26}|{:<15}|{:<26}|\n", "      Имя сотрудника", "     Месяц", "    Отработанное время");
-    cout << format("+{:-<26}+{:-<15}+{:-<26}+\n", "", "", "");
+    cout << format("+{:=<26}+{:=<15}+{:=<26}+\n", "", "", "");
     cout << "\033[0m";
 
     // Перебор всех сотрудников в векторе
@@ -225,14 +222,21 @@ void printTable(const vector<worker>& data) {
 
     // Нижняя граница таблицы
     cout << "\033[1;91m";
-    cout << format("+{:-<26}+{:-<15}+{:-<26}+\n", "", "", "");
+    cout << format("+{:=<26}+{:=<15}+{:=<26}+\n", "", "", "");
     cout << "\033[0m";
 }
 
 int main()
 {
     setlocale(LC_ALL, "ru_RU.UTF-8");
-    vector<worker> data = readData("file1.csv");
-    writeData("result1.csv", data);
-    printTable(data);
+    try
+    {
+        vector<worker> data = readData("file1.csv");
+        writeData("result1.csv", data);
+        printTable(data);
+    }
+    catch (const runtime_error& e)
+    {
+        cout << e.what();
+    }
 }
