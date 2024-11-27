@@ -237,7 +237,10 @@ void printTable(const vector<worker>& data) {
  */
 int main(int argc, char* argv[])
 {
-    setlocale(LC_ALL, "ru_RU.UTF-8");
+    setlocale(LC_ALL, "ru_RU.UTF-8"); // Локаль для поддержки кириллицы
+
+    // В аргументах на первом месте имя (путь) читаемого файла, а после него
+    // имя (путь) файла для записи
     string read_file_name = argv[1];
     string write_file_name = argv[2];
     try
@@ -248,7 +251,7 @@ int main(int argc, char* argv[])
     }
     catch (const runtime_error& e)
     {
-        cout << e.what();
+        cout << e.what(); // Вывод сообщения об ошибке
     }
     return 0;
 }
