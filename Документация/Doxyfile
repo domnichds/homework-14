@@ -1,0 +1,52 @@
+# Основные настройки
+PROJECT_NAME           = "Homework 14"
+OUTPUT_DIRECTORY       = C:/Users/user/projects/homework-14/docs
+INPUT                  = C:/Users/user/projects/homework-14
+FILE_PATTERNS          = *.cpp *.h
+RECURSIVE              = YES
+
+# Форматы вывода
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+
+GENERATE_LATEX         = NO
+
+# Язык документации
+OUTPUT_LANGUAGE        = Russian
+
+# Уровень детализации
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+EXTRACT_STRUCTS        = YES
+EXTRACT_CLASSES        = NO
+EXTRACT_FUNCTIONS      = YES
+EXTRACT_FILES          = NO
+EXTRACT_NAMESPACES     = NO
+
+# Описание функций и параметров
+ALWAYS_DETAILED_SEC    = YES
+INLINE_INFO            = YES
+BRIEF_MEMBER_DESC      = YES
+REPEAT_BRIEF           = YES
+SHOW_NAMESPACES        = NO
+SHOW_INCLUDE_FILES     = NO
+SHOW_USED_FILES        = NO
+
+# Графы и диаграммы
+HAVE_DOT               = NO
+CALL_GRAPH             = NO
+CALLER_GRAPH           = NO
+
+# Поддержка исходного кода
+INLINE_SOURCES         = NO
+SOURCE_BROWSER         = NO
+REFERENCES_RELATION    = NO
+REFERENCED_BY_RELATION = NO
+
+# Поддержка UTF-8
+INPUT_ENCODING         = UTF-8
+
+# Предупреждения
+WARN_IF_UNDOCUMENTED   = NO
+WARNINGS               = NO
