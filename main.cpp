@@ -226,17 +226,29 @@ void printTable(const vector<worker>& data) {
     cout << "\033[0m";
 }
 
-int main()
+/**
+ * @brief Главная функция.
+ *
+ * Данная функция принимает аргументы командной строки, вызывает функции для
+ * чтения, записи и вывода. При необходимости отлавливает и печатает ошибки
+ *
+ * @param argc - количество передаваемых аргументов
+ * @param argv - массив указателей на строки с аргументами
+ */
+int main(int argc, char* argv[])
 {
     setlocale(LC_ALL, "ru_RU.UTF-8");
+    string read_file_name = argv[1];
+    string write_file_name = argv[2];
     try
     {
-        vector<worker> data = readData("file1.csv");
-        writeData("result1.csv", data);
+        vector<worker> data = readData(read_file_name);
+        writeData(write_file_name, data);
         printTable(data);
     }
     catch (const runtime_error& e)
     {
         cout << e.what();
     }
+    return 0;
 }
